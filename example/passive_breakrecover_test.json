@@ -1,0 +1,12 @@
+{
+  "list": [
+    {
+      "id": 1071301,
+      "attributeStockCondition": [],
+      "requireIDList": [
+        "Modular/TIMING:EndBattle/VALUE_0:getunitstate(Self)/IF(VALUE_0=2):animmode(0,0,0,0,0,0,0):breakrecoveranim(S3#0,0,1.2,0.8)/",
+        "Modular/TIMING:EncounterStart/break(Self,natural)/"
+      ]
+    }
+  ]
+}
