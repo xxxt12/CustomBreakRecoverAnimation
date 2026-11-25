@@ -1,0 +1,58 @@
+name: Bug report / 问题反馈
+description: Report a problem with the plugin (motion slot missing, animation not playing, wrong pose, etc.)
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 请先看这几条 / Please check first
+        - **裁结尾后姿势回闲置**是引擎限制，不是 bug（见 README → Limitations）
+        - 如果**完全没有动画**，先确认 `animmode` 写在 `breakrecoveranim` **之前**
+        - 如果**动作槽无效**，先用动作槽扫描工具确认该单位是否有这个槽位
+
+  - type: input
+    id: unit
+    attributes:
+      label: 单位 ID / Unit ID
+      description: 例如 10713
+      placeholder: "10713"
+    validations:
+      required: true
+
+  - type: input
+    id: script
+    attributes:
+      label: 你的脚本 / Your script line
+      description: 贴出 passive 里那一行完整的 Modular 脚本
+      placeholder: "Modular/TIMING:EndBattle/...:animmode(...):breakrecoveranim(...)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: 现象 / What happens
+      description: 越具体越好（不播放？位置错？姿势错？音效没关？）
+    validations:
+      required: true
+
+  - type: textarea
+    id: log
+    attributes:
+      label: 日志 / Log excerpt
+      description: |
+        `BepInEx/LogOutput.log` 里 `[CBRA]` 开头的相关行。
+        至少包含 `build v...`、`playskillanim`/`breakrecoveranim`、`clip tracked`、`clip started`、`clip end`。
+      render: text
+    validations:
+      required: false
+
+  - type: input
+    id: versions
+    attributes:
+      label: 版本 / Versions
+      description: 插件版本 + ModularSkillScripts 版本 + 游戏版本
+      placeholder: "CBRA v4.6 / MSS 5.3.5 / game 1.xx"
+    validations:
+      required: true
