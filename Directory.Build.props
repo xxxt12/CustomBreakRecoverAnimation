@@ -1,0 +1,39 @@
+<Project>
+
+  <!--
+    这些路径指向游戏侧的 dll（BepInEx / 反编译 interop / Unity 库）。
+    它们不随仓库分发（版权 + 体积），需要在本地指定。
+
+    方式 1（推荐，一次设置永久生效）：
+      setx LIMBUS_BEPINEX  "D:\Steam\steamapps\common\Limbus Company\BepInEx"
+      setx LIMBUS_INTEROP "%LIMBUS_BEPINEX%\interop"
+      setx LIMBUS_UNITYLIB "%LIMBUS_BEPINEX%\unity-libs"
+      然后重新打开终端再 build。
+
+    方式 2（只影响本机、不进 git）：
+      在仓库根建 LocalPaths.props，内容：
+        <Project>
+          <PropertyGroup>
+            <LimbusBepInEx>D:\...\BepInEx</LimbusBepInEx>
+            <LimbusInterop>D:\...\BepInEx\interop</LimbusInterop>
+            <LimbusUnityLib>D:\...\BepInEx\unity-libs</LimbusUnityLib>
+          </PropertyGroup>
+        </Project>
+  -->
+
+  <PropertyGroup>
+    <LimbusBepInEx Condition="'$(LimbusBepInEx)' == ''">$(LIMBUS_BEPINEX)</LimbusBepInEx>
+    <LimbusInterop Condition="'$(LimbusInterop)' == ''">$(LIMBUS_INTEROP)</LimbusInterop>
+    <LimbusUnityLib Condition="'$(LimbusUnityLib)' == ''">$(LIMBUS_UNITYLIB)</LimbusUnityLib>
+  </PropertyGroup>
+
+  <!-- 本地覆盖（不进版本库） -->
+  <Import Project="$(MSBuildThisFileDirectory)LocalPaths.props"
+          Condition="Exists('$(MSBuildThisFileDirectory)LocalPaths.props')" />
+
+  <Target Name="CheckLimbusPaths" BeforeTargets="BeforeBuild">
+    <Warning Condition="'$(LimbusBepInEx)' == ''"
+             Text="未配置 LIMBUS_BEPINEX —— 编译会因找不到引用而失败。请阅读 BUILDING.md。" />
+  </Target>
+
+</Project>
