@@ -1,0 +1,30 @@
+# ---- .NET ----
+bin/
+obj/
+*.user
+*.suo
+.vs/
+artifacts/
+
+# ---- 本地路径配置（含个人机器路径，绝不提交）----
+LocalPaths.props
+*.local.props
+
+# ---- 游戏侧 dll（版权 + 体积，禁止提交）----
+*.dll
+*.pdb
+*.so
+*.dylib
+!docs/**/*.png
+
+# ---- 编辑器 / 系统 ----
+.idea/
+.vscode/
+*.swp
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ---- 临时 ----
+*.log
+*.tmp
